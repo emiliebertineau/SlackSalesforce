@@ -1,4 +1,4 @@
-# Slackforce
+# SlackSalesforce
 
 A simple Node.js application that acts as a Slash Command message broker between Slack and Salesforce.
 
