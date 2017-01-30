@@ -37,7 +37,7 @@ function execute(req, res) {
                 });
                 res.json({
                     response_type: "in_channel",
-                    text: "Achievements de " + expertAchievement[0].get("Slack_User_Name__c"),
+                    text: "Achievements de " + slackUserName,
                     attachments: attachments
                 });
             } else {
