@@ -16,37 +16,7 @@ function execute(req, res) {
 
     console.log('params: ' + params);
     console.log('slackUserId: ' + slackUserId);
-    if(params == null) {
-        console.log('PARAMS EST NULL !!!');
-    }
-    if(params == undefined) {
-        console.log('PARAMS EST UNDEFINED !!!');
-    }
-    if(params === null) {
-        console.log('PARAMS EST NULL 2 !!!');
-    }
-    if(params === undefined) {
-        console.log('PARAMS EST UNDEFINED 2 !!!');
-    }
-    if(req.body == null) {
-        console.log('RES.BODY EST NULL !!!');
-    }
-    if(req.body == undefined) {
-        console.log('RES.BODY EST NULL !!!');
-    }
-    if(req.body === null) {
-        console.log('RES.BODY EST NULL 2 !!!');
-    }
-    if(req.body === undefined) {
-        console.log('RES.BODY EST NULL 2 !!!');
-    }
-    if(!params) {
-        console.log('PARAMS EST NULL 3 !!!');
-    }
-    if(params == "") {
-        console.log('PARAMS EST NULL 4 !!!');
-    }
-    if(params == "" || params == 'List') {
+    if(params == '' || params == 'list') {
         var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
             if (err) {
@@ -72,6 +42,18 @@ function execute(req, res) {
             } else {
                 res.send("No records");
             }
+        });
+    } else if(params == 'help') {
+        var attachments = [];
+        var fields = [];
+        fields.push({value: '/expert : renvoie la liste de vos Achievements.', short:true});
+        fields.push({value: '/expert list : renvoie la liste de vos Achievements.', short:true});
+        fields.push({value: '/expert xxxxx : créé un Achievement avec pour text xxxxx.', short:true});
+        attachments.push({color: "#FCB95B", fields: fields});
+        res.json({
+            response_type: "in_channel",
+            text: "Comment utiliser le /expert:",
+            attachments: attachments
         });
     } else {
         var c = nforce.createSObject('Expert_Achievement__c');
