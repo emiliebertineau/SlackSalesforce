@@ -12,12 +12,16 @@ exports.execute = (req, res) => {
         return;
     }
 
+    console.log('OPPORTUNITY TOKEN OK')
+
     let slackUserId = req.body.user_id,
         oauthObj = auth.getOAuthObject(slackUserId),
         limit = req.body.text,
         q = "SELECT Id, Name, Amount, Probability, StageName, CloseDate FROM Opportunity where isClosed=false ORDER BY amount DESC LIMIT " + limit;
 
     if (!limit || limit=="") limit = 5;
+
+    console.log('QUERY: ' + q)
 
     force.query(oauthObj, q)
         .then(data => {
