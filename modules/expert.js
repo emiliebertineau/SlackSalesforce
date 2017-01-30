@@ -16,11 +16,17 @@ function execute(req, res) {
 
     console.log('params: ' + params);
     console.log('slackUserId: ' + slackUserId);
-    if(params == null || params === undefined) {
-        console.log('PARAMS EST NULL !!!');
+    if(req.body == null) {
+        console.log('RES.BODY EST NULL !!!');
     }
-    if (params == undefined || params === undefined) {
-        console.log('PARAMS EST UNDEFINED !!!');
+    if(req.body == undefined) {
+        console.log('RES.BODY EST NULL !!!');
+    }
+    if(req.body === null) {
+        console.log('RES.BODY EST NULL 2 !!!');
+    }
+    if(req.body === undefined) {
+        console.log('RES.BODY EST NULL 2 !!!');
     }
     if(params == null || params == 'List' || params == undefined) {
         var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
