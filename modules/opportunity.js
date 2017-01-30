@@ -8,7 +8,7 @@ let auth = require("./slack-salesforce-auth"),
 exports.execute = (req, res) => {
 
     if (req.body.token != OPPORTUNITY_TOKEN) {
-        res.send("Invalid token");
+        res.send("Invalid Opportunity token");
         return;
     }
 

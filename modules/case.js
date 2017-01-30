@@ -7,7 +7,7 @@ let auth = require("./slack-salesforce-auth"),
 exports.execute = (req, res) => {
 
     if (req.body.token != CASE_TOKEN) {
-        res.send("Invalid token");
+        res.send("Invalid Case token");
         return;
     }
 
