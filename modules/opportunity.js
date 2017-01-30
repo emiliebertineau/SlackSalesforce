@@ -17,7 +17,7 @@ exports.execute = (req, res) => {
     let slackUserId = req.body.user_id,
         oauthObj = auth.getOAuthObject(slackUserId),
         limit = req.body.text,
-        q = "SELECT Id, Name, Amount, Probability, StageName, CloseDate FROM Opportunity where isClosed=false ORDER BY amount DESC LIMIT " + limit;
+        q = "SELECT Id, Name, Amount, Probability, StageName, CloseDate FROM Opportunity where isClosed=false ORDER BY amount"; //DESC LIMIT " + limit;
 
     if (!limit || limit=="") limit = 5;
 
