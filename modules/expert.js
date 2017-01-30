@@ -31,8 +31,11 @@ function execute(req, res) {
                 var expertAchievements = resp.records;
                 var attachments = [];
                 expertAchievements.forEach(function(expertAchievement) {     
-                    var fields = [];               
-                    fields.push({title: "Achievement - " + expertAchievement.get("CreatedDate"), value: expertAchievement.get("Achievement__c"), short:false});
+                    var fields = [];
+                    var dateSansHeure = expertAchievement.get("CreatedDate").split("T");
+                    var dateConcassee = dateSansHeure[0].split("-");
+                    var date = dateConcassee[2] + dateConcassee[1] + dateConcassee[0];
+                    fields.push({title: "Achievement - " + date, value: expertAchievement.get("Achievement__c"), short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
                 res.json({
