@@ -16,6 +16,9 @@ function execute(req, res) {
 
     console.log('params: ' + params);
     console.log('slackUserId: ' + slackUserId);
+    if(params == null) {
+        console.log('PARAMS EST NULL !!!');
+    }
     if(params == null || params == 'List') {
         var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
