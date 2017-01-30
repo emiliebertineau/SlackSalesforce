@@ -7,7 +7,7 @@ var nforce = require('nforce'),
 function execute(req, res) {
 
     if (req.body.token != EXPERT_TOKEN) {
-        res.send("Invalid token");
+        res.send("Le token n'est pas valide.");
         return;
     }
 
@@ -20,28 +20,29 @@ function execute(req, res) {
     console.log('slackUserName: ' + slackUserName);
 
     if(params == '' || params == 'list') {
-        var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
+        var q = "SELECT Id, Name, Slack_ID__c, Achievement__c, Slack_User_Name__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
             if (err) {
                 console.error(err);
-                res.send("An error as occurred");
+                res.send("Une erreur s'est produite.");
                 return;
             }
             if (resp.records && resp.records.length>0) {
                 var expertAchievements = resp.records;
                 var attachments = [];
-                expertAchievements.forEach(function(expertAchievement) {
-                    var fields = [];
-                    fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:true});
+                var fields = [];
+                fields.push({title: "Achievements de :", value: expertAchievement[0].get("Slack_User_Name__c"), short:false});
+                expertAchievements.forEach(function(expertAchievement) {                    
+                    fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
                 res.json({
                     response_type: "in_channel",
-                    text: "Your Achievement",
+                    text: "Achievements de " + expertAchievement[0].get("Slack_User_Name__c"),
                     attachments: attachments
                 });
             } else {
-                res.send("No records");
+                res.send("Aucun record n'a été trouvé.");
             }
         });
     } else if(params == 'help') {
@@ -59,20 +60,20 @@ function execute(req, res) {
     } else {
         var c = nforce.createSObject('Expert_Achievement__c');
         var achievement = params;
-        c.set('Slack_ID__c', slackUserId);
+        c.set('Slack_User_ID__c', slackUserId);
+        c.set('Slack_User_Name__c', slackUserName);
         c.set('Achievement__c', achievement);
 
         org.insert({ sobject: c}, function(err, resp) {
             if (err) {
                 console.error(err);
-                res.send("An error occurred while creating an expert achievement");
+                res.send("Une erreur s'est produite lors de la création de votre Achievement.");
             } else {
                 var fields = [];
-                //fields.push({title: "Username", value: slackUserName, short:false});
                 fields.push({title: "Achievement", value: params, short:false});
                 var message = {
                     response_type: "in_channel",
-                    text: "A new achievement has been created:",
+                    text: "Un nouvel Achievement a été créé:",
                     attachments: [
                         {color: "#F2CF5B", fields: fields}
                     ]
