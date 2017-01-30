@@ -31,7 +31,6 @@ function execute(req, res) {
                 var expertAchievements = resp.records;
                 var attachments = [];
                 var fields = [];
-                fields.push({title: "Achievements de :", value: expertAchievement[0].get("Slack_User_Name__c"), short:false});
                 expertAchievements.forEach(function(expertAchievement) {                    
                     fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
