@@ -24,7 +24,6 @@ exports.execute = (req, res) => {
     console.log('QUERY: ' + q)
 
     force.query(oauthObj, q)
-    	console.log('12')
         .then(data => {
         	console.log('13')
             let opportunities = JSON.parse(data).records;
