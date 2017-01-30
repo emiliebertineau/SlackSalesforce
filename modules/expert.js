@@ -16,6 +16,18 @@ function execute(req, res) {
 
     console.log('params: ' + params);
     console.log('slackUserId: ' + slackUserId);
+    if(params == null) {
+        console.log('PARAMS EST NULL !!!');
+    }
+    if(params == undefined) {
+        console.log('PARAMS EST UNDEFINED !!!');
+    }
+    if(params === null) {
+        console.log('PARAMS EST NULL 2 !!!');
+    }
+    if(params === undefined) {
+        console.log('PARAMS EST UNDEFINED 2 !!!');
+    }
     if(req.body == null) {
         console.log('RES.BODY EST NULL !!!');
     }
