@@ -54,17 +54,20 @@ function execute(req, res) {
                 console.error(err);
                 res.send("An error occurred while creating an expert achievement");
             } else {
-                var fields = [];
-                fields.push({title: "Slack ID", value: resp.Slack_ID__c, short:false});
-                fields.push({title: "Achievement", value: resp.Achievement__c, short:false});
-                fields.push({title: "Link", value: 'https://login.salesforce.com/' + resp.id, short:false});
-                var message = {
-                    response_type: "in_channel",
-                    text: "A new achievement has been created:",
-                    attachments: [
-                        {color: "#F2CF5B", fields: fields}
-                    ]
-                };
+                var expertAchievements = resp.records;
+                expertAchievements.forEach(function(expertAchievement) {
+                    var fields = [];
+                    fields.push({title: "Slack ID", value: expertAchievement.get("Slack_ID__c"), short:false});
+                    fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:false});
+                    fields.push({title: "Link", value: 'https://login.salesforce.com/' + expertAchievement.getId(), short:false});
+                    var message = {
+                        response_type: "in_channel",
+                        text: "A new achievement has been created:",
+                        attachments: [
+                            {color: "#F2CF5B", fields: fields}
+                        ]
+                    };
+                }
                 res.json(message);
             }
         });
