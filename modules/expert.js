@@ -13,9 +13,12 @@ function execute(req, res) {
 
     var params = req.body.text;
     var slackUserId = req.body.user_id;
+    var slackUserName = req.body.user_name;
 
     console.log('params: ' + params);
     console.log('slackUserId: ' + slackUserId);
+    console.log('slackUserName: ' + slackUserName);
+
     if(params == '' || params == 'list') {
         var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
@@ -29,9 +32,7 @@ function execute(req, res) {
                 var attachments = [];
                 expertAchievements.forEach(function(expertAchievement) {
                     var fields = [];
-                    fields.push({title: "Slack User ID", value: expertAchievement.get("Slack_ID__c"), short:true});
                     fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:true});
-                    fields.push({title: "Link", value: "https://login.salesforce.com/" + expertAchievement.getId(), short:true});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
                 res.json({
@@ -46,9 +47,9 @@ function execute(req, res) {
     } else if(params == 'help') {
         var attachments = [];
         var fields = [];
-        fields.push({value: '/expert : renvoie la liste de vos Achievements.', short:true});
-        fields.push({value: '/expert list : renvoie la liste de vos Achievements.', short:true});
-        fields.push({value: '/expert xxxxx : créé un Achievement avec pour text xxxxx.', short:true});
+        fields.push({value: '/expert : renvoie la liste de vos Achievements.', short:false});
+        fields.push({value: '/expert list : renvoie la liste de vos Achievements.', short:false});
+        fields.push({value: '/expert xxxxx : créé un Achievement avec pour text xxxxx.', short:false});
         attachments.push({color: "#FCB95B", fields: fields});
         res.json({
             response_type: "in_channel",
@@ -67,9 +68,8 @@ function execute(req, res) {
                 res.send("An error occurred while creating an expert achievement");
             } else {
                 var fields = [];
-                fields.push({title: "Slack ID", value: slackUserId, short:false});
+                //fields.push({title: "Username", value: slackUserName, short:false});
                 fields.push({title: "Achievement", value: params, short:false});
-                fields.push({title: "Link", value: 'https://login.salesforce.com/' + resp.id, short:false});
                 var message = {
                     response_type: "in_channel",
                     text: "A new achievement has been created:",
