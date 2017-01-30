@@ -2,6 +2,7 @@ var nforce = require('nforce'),
     org = require('./auth').org,
 
     EXPERT_TOKEN = process.env.SLACK_EXPERT_TOKEN;
+    console.log('EXPERT_TOKEN: ' + EXPERT_TOKEN);
 
 function execute(req, res) {
 
