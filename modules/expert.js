@@ -20,7 +20,7 @@ function execute(req, res) {
     console.log('slackUserName: ' + slackUserName);
 
     if(params == '' || params == 'list') {
-        var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c FROM Expert_Achievement__c WHERE Slack_User_ID__c = '" + slackUserId + "'";
+        var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c, CreatedDate FROM Expert_Achievement__c WHERE Slack_User_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
             if (err) {
                 console.error(err);
@@ -32,7 +32,7 @@ function execute(req, res) {
                 var attachments = [];
                 expertAchievements.forEach(function(expertAchievement) {     
                     var fields = [];               
-                    fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:false});
+                    fields.push({title: "Achievement - " + expertAchievement.get("CreatedDate"), value: expertAchievement.get("Achievement__c"), short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
                 res.json({
