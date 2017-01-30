@@ -20,7 +20,7 @@ function execute(req, res) {
     console.log('slackUserName: ' + slackUserName);
 
     if(params == '' || params == 'list') {
-        var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
+        var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c FROM Expert_Achievement__c WHERE Slack_User_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
             if (err) {
                 console.error(err);
