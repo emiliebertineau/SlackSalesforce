@@ -34,7 +34,7 @@ function execute(req, res) {
                     var fields = [];
                     var dateSansHeure = expertAchievement.get("CreatedDate").split("T");
                     var dateConcassee = dateSansHeure[0].split("-");
-                    var date = dateConcassee[2] + dateConcassee[1] + dateConcassee[0];
+                    var date = dateConcassee[2] + '-' + dateConcassee[1] + '-' + dateConcassee[0];
                     fields.push({title: "Achievement - " + date, value: expertAchievement.get("Achievement__c"), short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
