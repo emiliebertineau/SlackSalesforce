@@ -30,8 +30,8 @@ function execute(req, res) {
             if (resp.records && resp.records.length>0) {
                 var expertAchievements = resp.records;
                 var attachments = [];
-                var fields = [];
-                expertAchievements.forEach(function(expertAchievement) {                    
+                expertAchievements.forEach(function(expertAchievement) {     
+                    var fields = [];               
                     fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
