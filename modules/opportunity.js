@@ -22,6 +22,7 @@ exports.execute = (req, res) => {
     if (!limit || limit=="") limit = 5;
 
     console.log('QUERY: ' + q)
+    console.log('OAUTH OBJ: ' + oauthObj)
 
     force.query(oauthObj, q)
         .then(data => {
