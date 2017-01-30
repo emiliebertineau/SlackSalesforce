@@ -21,7 +21,9 @@ exports.execute = (req, res) => {
 
     force.query(oauthObj, q)
         .then(data => {
+        	console.log('13')
             let opportunities = JSON.parse(data).records;
+        	console.log('Opportunities: ' + opportunities)
             if (opportunities && opportunities.length > 0) {
                 let attachments = [];
                 opportunities.forEach(function (opportunity) {
