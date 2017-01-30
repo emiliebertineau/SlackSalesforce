@@ -16,10 +16,10 @@ function execute(req, res) {
 
     console.log('params: ' + params);
     console.log('slackUserId: ' + slackUserId);
-    if(params == null) {
+    if(params == null || params === undefined) {
         console.log('PARAMS EST NULL !!!');
     }
-    if (params == undefined) {
+    if (params == undefined || params === undefined) {
         console.log('PARAMS EST UNDEFINED !!!');
     }
     if(params == null || params == 'List' || params == undefined) {
