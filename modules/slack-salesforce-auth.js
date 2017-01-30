@@ -11,7 +11,7 @@ var SLACK_LOGIN_TOKEN = process.env.SLACK_LOGIN_TOKEN,
 exports.logout = (req,res) => {
 
     if (req.body.token != SLACK_LOGOUT_TOKEN) {
-        res.send("Invalid token");
+        res.send("Invalid Logout token");
         return;
     }
 
@@ -25,7 +25,7 @@ exports.logout = (req,res) => {
 exports.loginLink = (req, res) => {
 
     if (req.body.token != SLACK_LOGIN_TOKEN) {
-        res.send("Invalid token");
+        res.send("Invalid Login token");
         return;
     }
 
