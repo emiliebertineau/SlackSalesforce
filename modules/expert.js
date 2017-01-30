@@ -25,9 +25,9 @@ function execute(req, res) {
                 return;
             }
             if (resp.records && resp.records.length>0) {
-                var expertAchievement = resp.records;
+                var expertAchievements = resp.records;
                 var attachments = [];
-                opportunities.forEach(function(opportunity) {
+                expertAchievements.forEach(function(expertAchievement) {
                     var fields = [];
                     fields.push({title: "Slack User ID", value: expertAchievement.get("Slack_ID__c"), short:true});
                     fields.push({title: "Achievement", value: expertAchievement.get("Achievement__c"), short:true});
