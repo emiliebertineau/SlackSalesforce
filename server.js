@@ -4,7 +4,7 @@ var express = require('express'),
     contact = require('./modules/contact'),
     opportunity = require('./modules/opportunity'),
     _case = require('./modules/case'),
-    _case = require('./modules/expert'),
+    expert = require('./modules/expert'),
     app = express();
 
 app.set('port', process.env.PORT || 5000);
