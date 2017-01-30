@@ -40,6 +40,9 @@ function execute(req, res) {
     if(req.body === undefined) {
         console.log('RES.BODY EST NULL 2 !!!');
     }
+    if(!params) {
+        console.log('PARAMS EST NULL 3 !!!');
+    }
     if(params == null || params == 'List' || params == undefined) {
         var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
