@@ -29,6 +29,7 @@ exports.loginLink = (req, res) => {
         return;
     }
 
+    console.log('RESPONSE EXPORTS LOGINLINK')
     res.send(`Visit this URL to login to Salesforce: https://${req.hostname}/login/` + req.body.user_id);
 
 };
