@@ -17,7 +17,7 @@ function execute(req, res) {
     console.log('params: ' + params);
     console.log('slackUserId: ' + slackUserId);
     if(params == null || params == 'List') {
-        var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = " + slackUserId;
+        var q = "SELECT Id, Name, Slack_ID__c, Achievement__c FROM Expert_Achievement__c WHERE Slack_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
             if (err) {
                 console.error(err);
@@ -45,9 +45,9 @@ function execute(req, res) {
         });
     } else {
         var c = nforce.createSObject('Expert_Achievement__c');
+        var achievement = params;
         c.set('Slack_ID__c', slackUserId);
         c.set('Achievement__c', achievement);
-        var achievement = params;
 
         org.insert({ sobject: c}, function(err, resp) {
             if (err) {
