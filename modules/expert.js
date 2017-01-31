@@ -68,7 +68,7 @@ function execute(req, res) {
         fields.push({value: '/expert : renvoie la liste de vos Achievements.', short:false});
         fields.push({value: '/expert list : renvoie la liste de vos Achievements.', short:false});
         fields.push({value: '/expert xxxxx : créé un Achievement avec pour text xxxxx.', short:false});
-        fields.push({value: 'Les domaines existant sont les suivant: ' + domainList, short:false});
+        fields.push({value: 'Les domaines existants sont les suivant: ' + domainList, short:false});
         attachments.push({color: "#FCB95B", fields: fields});
         res.json({
             response_type: "ephemeral",
