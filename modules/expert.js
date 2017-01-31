@@ -1,20 +1,17 @@
 var nforce = require('nforce'),
-    org = require('./auth').org,
+org = require('./auth').org,
 
-    EXPERT_TOKEN = process.env.SLACK_EXPERT_TOKEN;
-    console.log('EXPERT_TOKEN: ' + EXPERT_TOKEN);
-    EXPERT_DOMAIN = process.env.SLACK_EXPERT_DOMAIN;
-    console.log('EXPERT_DOMAIN: ' + EXPERT_DOMAIN);
+EXPERT_TOKEN = process.env.SLACK_EXPERT_TOKEN;
+console.log('EXPERT_TOKEN: ' + EXPERT_TOKEN);
+EXPERT_DOMAIN = process.env.SLACK_EXPERT_DOMAIN;
+console.log('EXPERT_DOMAIN: ' + EXPERT_DOMAIN);
 
-    var domains = EXPERT_DOMAIN.split('::');
-    var domainList = '';
-    for (var i = 0 ; i = domains.length - 1; i++) {
-        if(i != domains.length - 1) {
-            domainList += domains[i] + ', ';
-        } else {
-            domainList += domains[i];
-        }
-    }
+var domains = EXPERT_DOMAIN.split('::');
+var domainList = '';
+for (var i in domains) {
+    domainList += i + ', '; 
+}
+domainList = domainList.slice(0, -1);
 
 function execute(req, res) {
 
