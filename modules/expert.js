@@ -8,14 +8,13 @@ var nforce = require('nforce'),
 
     var domains = EXPERT_DOMAIN.split('::');
     var domainList = '';
-
     for (var i = 0 ; i = domains.length - 1; i++) {
         if(i != domains.length - 1) {
             domainList += domain + ', ';
         } else {
             domainList += domain;
         }
-    };
+    }
 
 function execute(req, res) {
 
