@@ -10,9 +10,9 @@ var nforce = require('nforce'),
     var domainList = '';
     for (var i = 0 ; i = domains.length - 1; i++) {
         if(i != domains.length - 1) {
-            domainList += domain + ', ';
+            domainList += domains[i] + ', ';
         } else {
-            domainList += domain;
+            domainList += domains[i];
         }
     }
 
