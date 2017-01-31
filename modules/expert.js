@@ -8,9 +8,17 @@ var nforce = require('nforce'),
 
     var domains = EXPERT_DOMAIN.split('::');
     var domainList = ''
-    domains.forEach(function(domain) {
-        domainList += domain + ', '
-    });
+    //domains.forEach(function(domain) {
+    //    domainList += domain + ', '
+    //});
+
+    for (var i = 0 ; i = domains.length - 1; i++) {
+        if(i != domains.length - 1) {
+            domainList += domain + ', ';
+        } else {
+            domainList += domain;
+        }
+    };
 
 function execute(req, res) {
 
@@ -74,9 +82,9 @@ function execute(req, res) {
         var c = nforce.createSObject('Expert_Achievement__c');
         var achievement = params.split("::");
 
-        console.log('achievement.size: ' + achievement.size)
-        if(achievement.size != 3) {
-            res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi DOMAINE::TEMPS(de type number)::Achievement.");
+        console.log('achievement.length: ' + achievement.length)
+        if(achievement.length != 3) {
+            res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::TEMPS(de type number)::Achievement.");
             return;
         }
 
