@@ -46,7 +46,11 @@ function execute(req, res) {
                     var dateSansHeure = expertAchievement.get("CreatedDate").split("T");
                     var dateConcassee = dateSansHeure[0].split("-");
                     var date = dateConcassee[2] + '/' + dateConcassee[1] + '/' + dateConcassee[0];
-                    fields.push({title: "Achievement - " + date, value: expertAchievement.get("Achievement__c") + '(' + expertAchievement.get("Id") + ')', short:false});
+                    var valeur = 'Domaine: ' + expertAchievement.get("Domaine_Expertise__c") + '\\n' +
+                                 'Nombre d\'heure: ' + expertAchievement.get("Nombre_Heure__c") + '\\n' +
+                                 'Description: ' + expertAchievement.get("Achievement__c");
+                    console.log('valeur: ' + valeur);
+                    fields.push({title: "Achievement - " + date, value: valeur, short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
                 res.json({
@@ -107,7 +111,11 @@ function execute(req, res) {
                 res.send("Une erreur s'est produite lors de la création de votre Achievement.");
             } else {
                 var fields = [];
-                fields.push({title: "Achievement", value: achievement[2], short:false});
+                var valeur = 'Domaine: ' + achievement[0] + '\\n' +
+                             'Nombre d\'heure: ' + heure + '\\n' +
+                             'Description: ' + achievement[2];
+                console.log('valeur: ' + valeur);
+                fields.push({title: "Achievement", value: valeur, short:false});
                 var message = {
                     response_type: "ephemeral",
                     text: "Un nouvel Achievement a été créé:",
