@@ -83,7 +83,7 @@ function execute(req, res) {
 
         console.log('achievement[1]: ' + achievement[1]);
         var heure = achievement[1];
-        if(heure.includes(',');) {
+        if(heure.includes(',')) {
             var heure = heure.replace(',', '.');
         }
         console.log('heure: ' + heure);
