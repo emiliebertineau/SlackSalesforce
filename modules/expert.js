@@ -75,9 +75,16 @@ function execute(req, res) {
         var c = nforce.createSObject('Expert_Achievement__c');
         var achievement = params.split("::");
 
+        // On vérifie qu'il y a bien les 3 paramètres pour créer l'Achievement
         console.log('achievement.length: ' + achievement.length);
         if(achievement.length != 3) {
             res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::TEMPS(de type number)::Achievement.");
+            return;
+        }
+
+        // On vérifie que le Domaine rentré fait bien partie des Domaines accepté. 
+        if(EXPERT_DOMAIN.includes(achievement[0])) {
+            res.send('Le Domaine rentré n\'est pas acceptable. Pour connaitre les Domaines acceptés tapez "/expert help"');
             return;
         }
 
