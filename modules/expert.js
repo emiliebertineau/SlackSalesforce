@@ -8,8 +8,8 @@ console.log('EXPERT_DOMAIN: ' + EXPERT_DOMAIN);
 
 var domains = EXPERT_DOMAIN.split('::');
 var domainList = '';
-for (var i in domains) {
-    domainList += i + ', '; 
+domains.forEach(function(domain) {
+    domainList += domain + ', '; 
 }
 domainList = domainList.slice(0, -1);
 
@@ -64,7 +64,7 @@ function execute(req, res) {
         fields.push({value: '/expert : renvoie la liste de vos Achievements.', short:false});
         fields.push({value: '/expert list : renvoie la liste de vos Achievements.', short:false});
         fields.push({value: '/expert xxxxx : créé un Achievement avec pour text xxxxx.', short:false});
-        fields.push({value: 'Les domaines existants sont les suivant: ' + domainList, short:false});
+        fields.push({value: 'Les domaines acceptés sont les suivant: ' + domainList, short:false});
         attachments.push({color: "#FCB95B", fields: fields});
         res.json({
             response_type: "ephemeral",
