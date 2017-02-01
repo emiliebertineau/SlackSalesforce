@@ -80,14 +80,18 @@ function execute(req, res) {
             res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::TEMPS(de type number)::Achievement.");
             return;
         }
-        console.log('achievement[0]: ' + achievement[0]);
+
         console.log('achievement[1]: ' + achievement[1]);
-        console.log('achievement[2]: ' + achievement[2]);
+        var heure = achievement[1];
+        if(heure.includes(',');) {
+            var heure = heure.replace(',', '.');
+        }
+        console.log('heure: ' + heure)
 
         c.set('Slack_User_ID__c', slackUserId);
         c.set('Slack_User_Name__c', slackUserName);
         c.set('Achievement__c', achievement[2]);
-        c.set('Nombre_Heure__c', achievement[1]);
+        c.set('Nombre_Heure__c', heure);
         c.set('Domaine_Expertise__c', achievement[0]);
 
         org.insert({ sobject: c}, function(err, resp) {
@@ -96,7 +100,7 @@ function execute(req, res) {
                 res.send("Une erreur s'est produite lors de la création de votre Achievement.");
             } else {
                 var fields = [];
-                fields.push({title: "Achievement", value: params, short:false});
+                fields.push({title: "Achievement", value: achievement[2], short:false});
                 var message = {
                     response_type: "ephemeral",
                     text: "Un nouvel Achievement a été créé:",
