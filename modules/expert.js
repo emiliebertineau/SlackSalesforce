@@ -83,7 +83,7 @@ function execute(req, res) {
         }
 
         // On vérifie que le Domaine rentré fait bien partie des Domaines accepté. 
-        if(EXPERT_DOMAIN.includes(achievement[0])) {
+        if(!EXPERT_DOMAIN.includes(achievement[0])) {
             res.send('Le Domaine rentré n\'est pas acceptable. Pour connaitre les Domaines acceptés tapez "/expert help"');
             return;
         }
