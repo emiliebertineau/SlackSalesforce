@@ -80,6 +80,9 @@ function execute(req, res) {
             res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::TEMPS(de type number)::Achievement.");
             return;
         }
+        console.log('achievement[0]: ' + achievement[0]);
+        console.log('achievement[1]: ' + achievement[1]);
+        console.log('achievement[2]: ' + achievement[2]);
 
         c.set('Slack_User_ID__c', slackUserId);
         c.set('Slack_User_Name__c', slackUserName);
