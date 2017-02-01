@@ -10,7 +10,7 @@ var domains = EXPERT_DOMAIN.split('::');
 var domainList = '';
 domains.forEach(function(domain) {
     domainList += domain + ', '; 
-}
+});
 domainList = domainList.slice(0, -1);
 
 function execute(req, res) {
