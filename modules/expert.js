@@ -75,7 +75,7 @@ function execute(req, res) {
         var c = nforce.createSObject('Expert_Achievement__c');
         var achievement = params.split("::");
 
-        console.log('achievement.length: ' + achievement.length)
+        console.log('achievement.length: ' + achievement.length);
         if(achievement.length != 3) {
             res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::TEMPS(de type number)::Achievement.");
             return;
@@ -86,7 +86,7 @@ function execute(req, res) {
         if(heure.includes(',');) {
             var heure = heure.replace(',', '.');
         }
-        console.log('heure: ' + heure)
+        console.log('heure: ' + heure);
 
         c.set('Slack_User_ID__c', slackUserId);
         c.set('Slack_User_Name__c', slackUserName);
