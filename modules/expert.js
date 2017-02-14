@@ -78,7 +78,7 @@ function execute(req, res) {
         fields.push({value: '/expert1 : renvoie la liste des commandes disponibles pour vos Achievements.', short:false});
         fields.push({value: '/expert1 list : renvoie la liste de vos Achievements.', short:false});
         fields.push({value: '/expert1 Domaine::Date de l\'achievement(jj/mm/aaaa)::Nombre d\'heure::Description : créé un Achievement.', short:false});
-        fields.push({value: 'Les domaines acceptés sont les suivant: ' + domainList, short:false});
+        fields.push({value: 'Les domaines acceptés sont les suivants: ' + domainList, short:false});
         attachments.push({color: "#FCB95B", fields: fields});
         res.json({
             response_type: "ephemeral",
@@ -92,7 +92,7 @@ function execute(req, res) {
         // On vérifie qu'il y a bien les 3 paramètres pour créer l'Achievement
         console.log('achievement.length: ' + achievement.length);
         if(achievement.length != 4) {
-            res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::Date de l\achievement(jj/mm/aaaa)::TEMPS(de type number)::Achievement.");
+            res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::Date de l\'achievement(jj/mm/aaaa)::TEMPS(de type number)::Description de l\'achievement.");
             return;
         }
 
