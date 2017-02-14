@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.post('/pipeline', opportunity.execute);
 app.post('/contact', contact.execute);
 app.post('/case', _case.execute);
-app.post('/expert', expert.execute);
+app.post('/expert1', expert.execute);
 
 
 app.listen(app.get('port'), function () {
