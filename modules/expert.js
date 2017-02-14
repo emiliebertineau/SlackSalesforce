@@ -46,10 +46,15 @@ function execute(req, res) {
                     var dateSansHeure = expertAchievement.get("CreatedDate").split("T");
                     var dateConcassee = dateSansHeure[0].split("-");
                     var date = dateConcassee[2] + '/' + dateConcassee[1] + '/' + dateConcassee[0];
+					var dateAchievementDisplayed='';
 					
-					var dateAchievementSFDC = expertAchievement.get("Date_achievement__c");
-					var dateAchievementSFDCSplit = dateAchievementSFDC.split("-");
-					var dateAchievementDisplayed = dateAchievementSFDCSplit[2]+'/'+dateAchievementSFDCSplit[1]+'/'+dateAchievementSFDCSplit[0];
+					if(expertAchievement.get("Date_achievement__c") != null)
+					{
+						var dateAchievementSFDC = expertAchievement.get("Date_achievement__c");
+						var dateAchievementSFDCSplit = dateAchievementSFDC.split("-");
+						var dateSplit = dateCmd.split("/");
+						dateAchievementDisplayed = dateAchievementSFDCSplit[2]+'/'+dateAchievementSFDCSplit[1]+'/'+dateAchievementSFDCSplit[0];
+					}
 			
                     var valeur = 'Domaine: ' + expertAchievement.get("Domaine_Expertise__c") + '\n' +
 								 'Date de l\'achievement : '+dateAchievementDisplayed+ '\n' +
