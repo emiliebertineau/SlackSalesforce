@@ -51,8 +51,7 @@ function execute(req, res) {
 					if(expertAchievement.get("Date_achievement__c") != null)
 					{
 						var dateAchievementSFDC = expertAchievement.get("Date_achievement__c");
-						var dateAchievementSFDCSplit = dateAchievementSFDC.split("-");
-						var dateSplit = dateCmd.split("/");
+						var dateAchievementSFDCSplit = dateAchievementSFDC.split("-");						
 						dateAchievementDisplayed = dateAchievementSFDCSplit[2]+'/'+dateAchievementSFDCSplit[1]+'/'+dateAchievementSFDCSplit[0];
 					}
 			
