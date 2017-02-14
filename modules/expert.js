@@ -108,7 +108,7 @@ function execute(req, res) {
 		}
 		
 		//création de la date
-		var dateAchievement = new Date(parts[2],parts[1],parts[0]); 
+		var dateAchievement = new Date(dateCmd[2],dateCmd[1],dateCmd[0]); 
         dateAchievement.setMonth(dateAchievement.getMonth()-1);
         
 		var heure = achievement[2];
