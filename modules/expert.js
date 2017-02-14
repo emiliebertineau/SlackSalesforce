@@ -98,7 +98,7 @@ function execute(req, res) {
 
         // On vérifie que le Domaine rentré fait bien partie des Domaines accepté. 
         if(!EXPERT_DOMAIN.includes(achievement[0])) {
-            res.send('Le Domaine rentré n\'est pas acceptable. Pour connaitre les Domaines acceptés tapez "/expert help"');
+            res.send('Le Domaine rentré n\'est pas acceptable. Pour connaitre les Domaines acceptés tapez "/expert1 help"');
             return;
         }
 		
@@ -158,7 +158,7 @@ function execute(req, res) {
                 var valeur = 'Domaine: ' + achievement[0] + '\n' +
 							 'Date de l\'achievement : '+achievement[1]+'\n'+
                              'Nombre d\'heure: ' + heure + '\n' +
-                             'Description: ' + achievement[2];
+                             'Description: ' + achievement[3];
                 console.log('valeur: ' + valeur);
                 fields.push({title: "Achievement", value: valeur, short:false});
                 var message = {
