@@ -32,7 +32,7 @@ function execute(req, res) {
         var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c, CreatedDate, Nombre_Heure__c, Domaine_Expertise__c, Date_achievement__c " +
                 "FROM Expert_Achievement__c " + 
                 "WHERE Slack_User_ID__c = '" + slackUserId + "' "+
-				"ORDER BY Date_achievement__c DESC";				
+				"ORDER BY Date_achievement__c";				
         org.query({query: q}, function(err, resp) {
             if (err) {
                 console.error(err);
@@ -60,7 +60,7 @@ function execute(req, res) {
 								 'Date de l\'achievement : '+dateAchievementDisplayed+ '\n' +
                                  'Nombre d\'heure: ' + expertAchievement.get("Nombre_Heure__c") + '\n';                                 
                     console.log('valeur: ' + valeur);
-                    fields.push({title: "Achievement - " + expertAchievement.get("Achievement__c"), value: valeur, short:false});
+                    fields.push({title: expertAchievement.get("Achievement__c"), value: valeur, short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
                 res.json({
