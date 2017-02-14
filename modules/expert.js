@@ -156,7 +156,7 @@ function execute(req, res) {
             } else {
                 var fields = [];
                 var valeur = 'Domaine: ' + achievement[0] + '\n' +
-							 'Date de l\'achievement : '+achievement[1]+
+							 'Date de l\'achievement : '+achievement[1]+'\n'+
                              'Nombre d\'heure: ' + heure + '\n' +
                              'Description: ' + achievement[2];
                 console.log('valeur: ' + valeur);
