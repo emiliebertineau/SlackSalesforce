@@ -47,8 +47,9 @@ function execute(req, res) {
                     var dateConcassee = dateSansHeure[0].split("-");
                     var date = dateConcassee[2] + '/' + dateConcassee[1] + '/' + dateConcassee[0];
 					
-					var dateAchievementSFDC = expertAchievement.get("Date_achievement__c").split("-");
-					var dateAchievementDisplayed = dateAchievementSFDC[2]+'/'+dateAchievementSFDC[1]+'/'+dateAchievementSFDC[0];
+					var dateAchievementSFDC = expertAchievement.get("Date_achievement__c");
+					var dateAchievementSFDCSplit = dateAchievementSFDC.split("-");
+					var dateAchievementDisplayed = dateAchievementSFDCSplit[2]+'/'+dateAchievementSFDCSplit[1]+'/'+dateAchievementSFDCSplit[0];
 			
                     var valeur = 'Domaine: ' + expertAchievement.get("Domaine_Expertise__c") + '\n' +
 								 'Date de l\'achievement : '+dateAchievementDisplayed+ '\n' +
