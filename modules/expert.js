@@ -67,7 +67,7 @@ function execute(req, res) {
         var fields = [];
         fields.push({value: '/expert : renvoie la liste de vos Achievements.', short:false});
         fields.push({value: '/expert list : renvoie la liste de vos Achievements.', short:false});
-        fields.push({value: '/expert Domaine::Nombre d\'heure::Description : créé un Achievement.', short:false});
+        fields.push({value: '/expert Domaine::Date de l\achievement::Nombre d\'heure::Description : créé un Achievement.', short:false});
         fields.push({value: 'Les domaines acceptés sont les suivant: ' + domainList, short:false});
         attachments.push({color: "#FCB95B", fields: fields});
         res.json({
@@ -81,8 +81,8 @@ function execute(req, res) {
 
         // On vérifie qu'il y a bien les 3 paramètres pour créer l'Achievement
         console.log('achievement.length: ' + achievement.length);
-        if(achievement.length != 3) {
-            res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::TEMPS(de type number)::Achievement.");
+        if(achievement.length != 4) {
+            res.send("Il n'y a pas le bon nombre d'arguments. Pour rappel la commande s'écrit ainsi : /expert DOMAINE::Date de l\achievement(jj/mm/aaaa)::TEMPS(de type number)::Achievement.");
             return;
         }
 
@@ -91,9 +91,13 @@ function execute(req, res) {
             res.send('Le Domaine rentré n\'est pas acceptable. Pour connaitre les Domaines acceptés tapez "/expert help"');
             return;
         }
-
-        console.log('achievement[1]: ' + achievement[1]);
-        var heure = achievement[1];
+		var parts =achievement[1].split('/');
+		//please put attention to the month (parts[0]), Javascript counts months from 0:
+		// January - 0, February - 1, etc
+		var mydate = new Date(parts[2],parts[0]-1,parts[1]); 
+        console.log('achievement[1]: ' + achievement[2]);
+        
+		var heure = achievement[2];
         if(heure.includes(',')) {
             var heure = heure.replace(',', '.');
         }
@@ -101,10 +105,10 @@ function execute(req, res) {
 
         c.set('Slack_User_ID__c', slackUserId);
         c.set('Slack_User_Name__c', slackUserName);
-        c.set('Achievement__c', achievement[2]);
+        c.set('Achievement__c', achievement[3]);
         c.set('Nombre_Heure__c', heure);
         c.set('Domaine_Expertise__c', achievement[0]);
-
+		c.set('Date_achievement__c', mydate);
         org.insert({ sobject: c}, function(err, resp) {
             if (err) {
                 console.error(err);
