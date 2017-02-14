@@ -31,7 +31,8 @@ function execute(req, res) {
     if(params == 'list') {
         var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c, CreatedDate, Nombre_Heure__c, Domaine_Expertise__c, Date_achievement__c " +
                 "FROM Expert_Achievement__c " + 
-                "WHERE Slack_User_ID__c = '" + slackUserId + "'";
+                "WHERE Slack_User_ID__c = '" + slackUserId + "' "+
+				"ORDER BY Date_achievement__c DESC";				
         org.query({query: q}, function(err, resp) {
             if (err) {
                 console.error(err);
@@ -57,10 +58,9 @@ function execute(req, res) {
 			
                     var valeur = 'Domaine: ' + expertAchievement.get("Domaine_Expertise__c") + '\n' +
 								 'Date de l\'achievement : '+dateAchievementDisplayed+ '\n' +
-                                 'Nombre d\'heure: ' + expertAchievement.get("Nombre_Heure__c") + '\n' +
-                                 'Description: ' + expertAchievement.get("Achievement__c");
+                                 'Nombre d\'heure: ' + expertAchievement.get("Nombre_Heure__c") + '\n';                                 
                     console.log('valeur: ' + valeur);
-                    fields.push({title: "Achievement - " + date, value: valeur, short:false});
+                    fields.push({title: "Achievement - " + expertAchievement.get("Achievement__c"), value: valeur, short:false});
                     attachments.push({color: "#FCB95B", fields: fields});
                 });
                 res.json({
