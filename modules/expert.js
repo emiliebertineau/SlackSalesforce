@@ -75,14 +75,14 @@ function execute(req, res) {
     } else if(params == '' || params == 'help') {
         var attachments = [];
         var fields = [];
-        fields.push({value: '/expert1 : renvoie la liste de vos Achievements.', short:false});
+        fields.push({value: '/expert1 : renvoie la liste des commandes disponibles pour vos Achievements.', short:false});
         fields.push({value: '/expert1 list : renvoie la liste de vos Achievements.', short:false});
         fields.push({value: '/expert1 Domaine::Date de l\achievement(jj/mm/aaaa)::Nombre d\'heure::Description : créé un Achievement.', short:false});
         fields.push({value: 'Les domaines acceptés sont les suivant: ' + domainList, short:false});
         attachments.push({color: "#FCB95B", fields: fields});
         res.json({
             response_type: "ephemeral",
-            text: "Comment utiliser le /expert:",
+            text: "Comment utiliser le /expert1:",
             attachments: attachments
         });
     } else {
