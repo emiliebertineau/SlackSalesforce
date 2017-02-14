@@ -29,7 +29,7 @@ function execute(req, res) {
     console.log('slackUserName: ' + slackUserName);
 
     if(params == 'list') {
-        var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c, CreatedDate, Nombre_Heure__c, Domaine_Expertise__c " +
+        var q = "SELECT Id, Name, Slack_User_ID__c, Achievement__c, Slack_User_Name__c, CreatedDate, Nombre_Heure__c, Domaine_Expertise__c, Date_achievement__c " +
                 "FROM Expert_Achievement__c " + 
                 "WHERE Slack_User_ID__c = '" + slackUserId + "'";
         org.query({query: q}, function(err, resp) {
@@ -47,6 +47,7 @@ function execute(req, res) {
                     var dateConcassee = dateSansHeure[0].split("-");
                     var date = dateConcassee[2] + '/' + dateConcassee[1] + '/' + dateConcassee[0];
                     var valeur = 'Domaine: ' + expertAchievement.get("Domaine_Expertise__c") + '\n' +
+								 'Date de l\'achievement : '+expertAchievement.get("Date_achievement__c")+ '\n' +
                                  'Nombre d\'heure: ' + expertAchievement.get("Nombre_Heure__c") + '\n' +
                                  'Description: ' + expertAchievement.get("Achievement__c");
                     console.log('valeur: ' + valeur);
@@ -142,6 +143,7 @@ function execute(req, res) {
             } else {
                 var fields = [];
                 var valeur = 'Domaine: ' + achievement[0] + '\n' +
+							 'Date de l\'achievement : '+achievement[1]+
                              'Nombre d\'heure: ' + heure + '\n' +
                              'Description: ' + achievement[2];
                 console.log('valeur: ' + valeur);
