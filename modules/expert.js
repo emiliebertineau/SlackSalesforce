@@ -91,11 +91,25 @@ function execute(req, res) {
             res.send('Le Domaine rentré n\'est pas acceptable. Pour connaitre les Domaines acceptés tapez "/expert help"');
             return;
         }
-		var parts =achievement[1].split('/');
-		//please put attention to the month (parts[0]), Javascript counts months from 0:
-		// January - 0, February - 1, etc
-		var mydate = new Date(parts[2],parts[0]-1,parts[1]); 
-        console.log('achievement[1]: ' + achievement[2]);
+		
+		// TRAITEMENT de la Date de l'achievement
+		
+		// Récupération de la date dans la cmd
+		var dateCmd =achievement[1];
+		// comptage du nombre de slash pour verifier le format
+		var nbSlash = dateCmd.split("/").length;
+		// comptage de la taille de la date pour verifier le format
+		var	dateLength = dateCmd.length;	
+		
+		// envoi du message d'erreur si la date n'est pas au bon format
+		if(dateLength !=10 || nbSlash !=3)
+		{
+			 res.send('La date saisie est incorrecte. Le format de date attendu est le suivant : jj/mm/aaaa');
+		}
+		
+		//création de la date
+		var dateAchievement = new Date(parts[2],parts[1],parts[0]); 
+        dateAchievement.setMonth(dateAchievement.getMonth()-1);
         
 		var heure = achievement[2];
         if(heure.includes(',')) {
@@ -108,7 +122,7 @@ function execute(req, res) {
         c.set('Achievement__c', achievement[3]);
         c.set('Nombre_Heure__c', heure);
         c.set('Domaine_Expertise__c', achievement[0]);
-		c.set('Date_achievement__c', mydate);
+		c.set('Date_achievement__c', dateAchievement);
         org.insert({ sobject: c}, function(err, resp) {
             if (err) {
                 console.error(err);
