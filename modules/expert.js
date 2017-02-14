@@ -46,8 +46,12 @@ function execute(req, res) {
                     var dateSansHeure = expertAchievement.get("CreatedDate").split("T");
                     var dateConcassee = dateSansHeure[0].split("-");
                     var date = dateConcassee[2] + '/' + dateConcassee[1] + '/' + dateConcassee[0];
+					
+					var dateAchievementSFDC = expertAchievement.get("Date_achievement__c").split("-");
+					var dateAchievementDisplayed = dateSplit[2]+'/'+dateSplit[1]+'/'+dateSplit[0];
+			
                     var valeur = 'Domaine: ' + expertAchievement.get("Domaine_Expertise__c") + '\n' +
-								 'Date de l\'achievement : '+expertAchievement.get("Date_achievement__c")+ '\n' +
+								 'Date de l\'achievement : '+dateAchievementDisplayed+ '\n' +
                                  'Nombre d\'heure: ' + expertAchievement.get("Nombre_Heure__c") + '\n' +
                                  'Description: ' + expertAchievement.get("Achievement__c");
                     console.log('valeur: ' + valeur);
@@ -121,7 +125,11 @@ function execute(req, res) {
 			 res.send('La date saisie est dans le futur. Merci d\'effectuer une correction.');
 			 return;
 		}		
-
+		if(! dateAchievement instanceof Date && isFinite(dateAchievement))
+		{
+			res.send('La date saisie est invalide. Merci d\'effectuer une correction.');
+			return;
+		}
 		//// FIN TRAITEMENT de la Date de l'achievement
 		
 		var heure = achievement[2];
