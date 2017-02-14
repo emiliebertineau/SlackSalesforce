@@ -92,7 +92,7 @@ function execute(req, res) {
             return;
         }
 		
-		// TRAITEMENT de la Date de l'achievement
+		// DEBUT TRAITEMENT de la Date de l'achievement
 		
 		// Récupération de la date dans la cmd
 		var dateCmd =achievement[1];
@@ -112,9 +112,17 @@ function execute(req, res) {
 		var dateAchievement = new Date(dateSplit[2],dateSplit[1],dateSplit[0]);			
         dateAchievement.setMonth(dateAchievement.getMonth()-1);
 		
-        console.log('dateAchievement : '+dateAchievement);
+        
 		var dateDuJour = new Date();
-		console.log('dateDuJour : '+dateDuJour);		
+		//envoi d'un message si la date est dans le futur
+		if(dateAchievement> dateDuJour)
+		{
+			 res.send('La date saisie est dans le futur. Merci d\'effectuer une correction.');
+			 return;
+		}		
+
+		//// FIN TRAITEMENT de la Date de l'achievement
+		
 		var heure = achievement[2];
         if(heure.includes(',')) {
             var heure = heure.replace(',', '.');
