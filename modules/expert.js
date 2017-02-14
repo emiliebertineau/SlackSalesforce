@@ -109,7 +109,7 @@ function execute(req, res) {
 		}
 		var dateSplit = dateCmd.split("/");
 		//création de la date
-		var dateAchievement = new Date(dateCmd[2],dateCmd[1],dateCmd[0]); 
+		var dateAchievement = new Date(dateSplit[2],dateSplit[1],dateSplit[0]); 
         dateAchievement.setMonth(dateAchievement.getMonth()-1);
         console.log('dateAchievement : '+dateAchievement);
 		var heure = achievement[2];
