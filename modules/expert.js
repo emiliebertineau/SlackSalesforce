@@ -105,12 +105,13 @@ function execute(req, res) {
 		if(dateLength !=10 || nbSlash !=3)
 		{
 			 res.send('La date saisie est incorrecte. Le format de date attendu est le suivant : jj/mm/aaaa');
+			 return;
 		}
 		
 		//création de la date
 		var dateAchievement = new Date(dateCmd[2],dateCmd[1],dateCmd[0]); 
-        dateAchievement.setMonth(dateAchievement.getMonth()-1);
-        
+        //dateAchievement.setMonth(dateAchievement.getMonth()-1);
+        console.log('dateAchievement : '+dateAchievement);
 		var heure = achievement[2];
         if(heure.includes(',')) {
             var heure = heure.replace(',', '.');
