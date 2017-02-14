@@ -48,7 +48,7 @@ function execute(req, res) {
                     var date = dateConcassee[2] + '/' + dateConcassee[1] + '/' + dateConcassee[0];
 					
 					var dateAchievementSFDC = expertAchievement.get("Date_achievement__c").split("-");
-					var dateAchievementDisplayed = dateSplit[2]+'/'+dateSplit[1]+'/'+dateSplit[0];
+					var dateAchievementDisplayed = dateAchievementSFDC[2]+'/'+dateAchievementSFDC[1]+'/'+dateAchievementSFDC[0];
 			
                     var valeur = 'Domaine: ' + expertAchievement.get("Domaine_Expertise__c") + '\n' +
 								 'Date de l\'achievement : '+dateAchievementDisplayed+ '\n' +
@@ -125,7 +125,7 @@ function execute(req, res) {
 			 res.send('La date saisie est dans le futur. Merci d\'effectuer une correction.');
 			 return;
 		}		
-		if(! dateAchievement instanceof Date && isFinite(dateAchievement))
+		if(! (dateAchievement instanceof Date && isFinite(dateAchievement)))
 		{
 			res.send('La date saisie est invalide. Merci d\'effectuer une correction.');
 			return;
