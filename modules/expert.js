@@ -65,9 +65,9 @@ function execute(req, res) {
     } else if(params == '' || params == 'help') {
         var attachments = [];
         var fields = [];
-        fields.push({value: '/expert : renvoie la liste de vos Achievements.', short:false});
-        fields.push({value: '/expert list : renvoie la liste de vos Achievements.', short:false});
-        fields.push({value: '/expert Domaine::Date de l\achievement::Nombre d\'heure::Description : créé un Achievement.', short:false});
+        fields.push({value: '/expert1 : renvoie la liste de vos Achievements.', short:false});
+        fields.push({value: '/expert1 list : renvoie la liste de vos Achievements.', short:false});
+        fields.push({value: '/expert1 Domaine::Date de l\achievement(jj/mm/aaaa)::Nombre d\'heure::Description : créé un Achievement.', short:false});
         fields.push({value: 'Les domaines acceptés sont les suivant: ' + domainList, short:false});
         attachments.push({color: "#FCB95B", fields: fields});
         res.json({
@@ -109,9 +109,12 @@ function execute(req, res) {
 		}
 		var dateSplit = dateCmd.split("/");
 		//création de la date
-		var dateAchievement = new Date(dateSplit[2],dateSplit[1],dateSplit[0]); 
+		var dateAchievement = new Date(dateSplit[2],dateSplit[1],dateSplit[0]);			
         dateAchievement.setMonth(dateAchievement.getMonth()-1);
+		
         console.log('dateAchievement : '+dateAchievement);
+		var dateDuJour = new Date();
+		console.log('dateDuJour : '+dateDuJour);		
 		var heure = achievement[2];
         if(heure.includes(',')) {
             var heure = heure.replace(',', '.');
